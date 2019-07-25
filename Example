@@ -1,0 +1,28 @@
+String extract = input.replaceAll("[^a-zA-Z]+", "");
+
+char[] ArrayS1 = s1.toLowerCase().toCharArray();  
+char[] ArrayS2 = s2.toLowerCase().toCharArray();  
+Arrays.sort(ArrayS1);  
+Arrays.sort(ArrayS2);  
+status = Arrays.equals(ArrayS1, ArrayS2);
+
+public static Node buildBinarytreefromPostOrder(int[] post, int start, int end)
+{
+    if (end < start)
+        return null;
+
+    Node root = new Node(post[end]);
+
+    if (end == start)
+        return root;
+
+    int i;
+    for (i = end; i >= start; i--)
+        if (post[i] < root.data)
+            break;
+
+    root.left = buildBinarytreefromPostOrder(post, start, i);
+    root.right = buildBinarytreefromPostOrder(post, i + 1, end - 1);
+
+    return root;
+}
